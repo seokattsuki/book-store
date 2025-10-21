@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+@theme {
+  
+  --color-primary: #FFCE1A;
+  --color-secondary: #0D0842;
+  --color-blackBG: #F3F3F3;
+  --color-favorite: #FF5841;
+
+  --font-primary: "Montserrat", sans-serif;
+  --font-secondary: "Nunito Sans", sans-serif;
+}
+
+@layer utilities {
+  .bg-primary {
+    background-color: var(--color-primary);
+  }
+  .bg-secondary {
+    background-color: var(--color-secondary);
+  }
+  .bg-blackBG {
+    background-color: var(--color-blackBG);
+  }
+  .bg-favorite {
+    background-color: var(--color-favorite);
+  }
+  
+  .text-primary {
+    color: var(--color-primary);
+  }
+  .text-secondary {
+    color: var(--color-secondary);
+  }
+  .text-favorite {
+    color: var(--color-favorite);
+  }
+  
+  .border-primary {
+    border-color: var(--color-primary);
+  }
+  .border-secondary {
+    border-color: var(--color-secondary);
+  }
+}
