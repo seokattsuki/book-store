@@ -38,7 +38,7 @@ const Recommend = () => {
 
   return (
     <div className="py-12">
-      <h2 className="text-3xl font-semibold mb-8 text-gray-800">Recommended for You</h2>
+      <h2 className="text-3xl font-semibold mb-8 text-gray-800">Top Sellers</h2>
 
       {/* 🪄 Animated Category Buttons */}
       <div className="mb-10 flex flex-wrap items-center justify-between gap-6">
