@@ -1,13 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { HiBars3CenterLeft } from "react-icons/hi2";
+import { HiBars3CenterLeft, HiOutlineShoppingCart } from "react-icons/hi2";
 import { IoIosSearch } from "react-icons/io";
 import { FaRegUser } from "react-icons/fa6";
 import { FaRegHeart } from "react-icons/fa6";
-import { RiShoppingCart2Line } from "react-icons/ri";
 import { useState } from 'react';
-
 import avatarImg from '../assets/avatar.png'
+import { useSelector } from 'react-redux';
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard'},
@@ -19,6 +18,7 @@ const navigation = [
 function Navbar() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const currentUser = false;
+  const cartItems = useSelector(state => state.cart.cartItems);
   
   return (
     <header className='max-w-screen-2xl mx-auto px-8 md:px-16 py-6'>
@@ -90,8 +90,11 @@ function Navbar() {
               </button>
 
               <Link to='/cart' className='bg-primary p-1 sm:px-6 px-2 py-2 flex items-center rounded-sm'>
-                <RiShoppingCart2Line className='size-5'/>
-                <span className='text-sm font-semibold sm:ml-1'>0</span>
+                <HiOutlineShoppingCart className='size-5' />
+                {
+                  cartItems.length > 0 ? <span className='text-sm font-semibold sm:ml-1'>{cartItems.length}</span> : null
+                }
+                
               </Link>
             </div>
         </nav>

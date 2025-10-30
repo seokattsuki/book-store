@@ -2,8 +2,15 @@ import React from "react";
 import { FiShoppingCart } from "react-icons/fi";
 import { getImgUrl } from "../../utils/getImgUrl";
 import { Link } from "react-router-dom";
+import { addToCart } from "../../redux/features/cart/cartSlice";
+import { useDispatch } from "react-redux";
 
 const BookCard = ({ book }) => {
+  const dispatch = useDispatch();
+
+  const handleAddToCart = (product) => {
+    dispatch(addToCart(product));
+  }
   return (
     <div
       className="group relative rounded-2xl bg-white p-4 sm:p-5 border border-gray-100 
@@ -51,6 +58,7 @@ const BookCard = ({ book }) => {
           </p>
 
           <button
+            onClick={() => handleAddToCart(book)}
             className="btn-primary w-full sm:w-auto justify-center px-5 py-2 flex items-center gap-2 
             group-hover:shadow-[0_8px_20px_rgba(0,0,0,0.1)] transition-all duration-300 rounded-lg"
           >
