@@ -1,20 +1,21 @@
 import express from 'express';
-import Book from './book.model.js';
+import { postABook , getAllBooks, getSinglebook, updateBook, deleteBook} from './book.controller.js';
+
 
 const router = express.Router();
 
-router.post("/create-book", async (req, res) => {
-try {
-    const newBook = await Book({...req.body});
-    await newBook.save();
-    res.status(201)
-    .json({message: "Book posted successfully", book: newBook});
-} catch (error) {
-    res.status(500)
-    .json({message: "Failed to post book", error: error.message});
-    
-}
+router.post("/create-book", postABook);
 
-})
+//get all books
+router.get("/", getAllBooks);
+
+// single book endpoint
+router.get("/:id", getSinglebook)
+
+// update book
+router.put("/edit/:id", updateBook);
+
+//delete book
+router.delete("/:id", deleteBook);
 
 export default router;
