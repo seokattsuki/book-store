@@ -1,11 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import getBaseUrl from '../../../utils/baseURL'
 
-const  baseQuery = fetchBaseQuery({
+const baseQuery = fetchBaseQuery({
     baseUrl: `${getBaseUrl()}/api/books`,
     credentials: 'include',
     prepareHeaders: (Headers) => {
-        const token =  localStorage.getItem('token');
+        const token = localStorage.getItem('token');
         if(token) {
             Headers.set('Authorization', `Bearer ${token}`);
         }
@@ -17,13 +17,17 @@ const booksApi = createApi({
     reducerPath: 'booksApi',
     baseQuery,
     tagTypes: ['Books'],
-    endpoints: (builder) =>({
+    endpoints: (builder) => ({
         fetchAllBooks: builder.query({
             query: () => "/",
+            // Transform the response to extract the books array
+            transformResponse: (response) => response.books,
             providesTags: ["Books"]
         }),
         fetchBookById: builder.query({
             query: (id) => `/${id}`,
+            // Transform the response to extract the book object
+            transformResponse: (response) => response.book,
             providesTags: (result, error, id) => [{ type: "Books", id }],
         }),
         addBook: builder.mutation({
@@ -55,5 +59,12 @@ const booksApi = createApi({
     })
 })
 
-export const {useFetchAllBooksQuery, useFetchBookByIdQuery, useAddBookMutation, useUpdateBookMutation, useDeleteBookMutation} = booksApi;
+export const {
+    useFetchAllBooksQuery, 
+    useFetchBookByIdQuery, 
+    useAddBookMutation, 
+    useUpdateBookMutation, 
+    useDeleteBookMutation
+} = booksApi;
+
 export default booksApi;
